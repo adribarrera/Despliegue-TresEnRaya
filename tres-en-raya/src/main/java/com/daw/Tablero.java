@@ -54,10 +54,60 @@ public class Tablero {
                     break;
                 }
             }
-            if (filaCompleta) {
+            if (columnaCompleta) {
                 return true;
             }
         }
         return false;
+    }
+
+    protected boolean ganaDiagonalDirecta(Ficha ficha) {
+        for (int i = 0; i < casillas.length; i++) {
+            if (casillas[i][i] != ficha) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    protected boolean ganaDiagonalIndirecta(Ficha ficha) {
+        int n = casillas.length;
+        for (int i = 0; i < n; i++) {
+            if (casillas[i][n - 1 - i] != ficha) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean gana(Ficha ficha) {
+        return ganaHorizontal(ficha) || ganaVertical(ficha) ||
+                ganaDiagonalDirecta(ficha) || ganaDiagonalIndirecta(ficha);
+    }
+
+    private String valueOf(Ficha ficha) {
+        if (ficha == null) {
+            return " ";
+        } else {
+            return ficha.toString();
+        }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < casillas.length; i++) {
+            for (int j = 0; j < casillas[i].length; j++) {
+                sb.append(" ").append(valueOf(casillas[i][j])).append(" ");
+                if (j < casillas[i].length - 1) {
+                    sb.append("|");
+                }
+            }
+            sb.append("\n");
+            if (i < casillas.length - 1) {
+                sb.append("---+---+---\n");
+            }
+        }
+        return sb.toString();
     }
 }
