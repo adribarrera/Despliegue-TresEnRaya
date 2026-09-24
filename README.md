@@ -4,7 +4,7 @@ El clásico juego del **Tres en Raya** implementado en Java para jugar por conso
 
 ---
 
-##¿Cómo funciona?
+## ¿Cómo funciona?
 
 1. **Elige quién empieza:** Al arrancar la partida, se elige si comienza jugando `X` o `O`.
 2. **Turnos y coordenadas:** En cada turno, introduces la **fila (1-3)** y la **columna (1-3)** donde quieres colocar tu ficha.
