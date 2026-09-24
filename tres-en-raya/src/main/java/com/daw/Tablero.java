@@ -7,6 +7,7 @@ public class Tablero {
         this.casillas = new Ficha[dim][dim];
     }
 
+    // Coloca la ficha si la casilla está libre y dentro de los límites
     public boolean jugar(Ficha ficha, int fila, int columna) {
         if (fila < 0 || fila >= casillas.length || columna < 0 || columna >= casillas.length) {
             return false;
@@ -29,6 +30,7 @@ public class Tablero {
         return true;
     }
 
+    // Comprueba si hay una fila completa con la misma ficha
     protected boolean ganaHorizontal(Ficha ficha) {
         for (int i = 0; i < casillas.length; i++) {
             boolean filaCompleta = true;
@@ -45,6 +47,7 @@ public class Tablero {
         return false;
     }
 
+    // Comprueba si hay una columna completa con la misma ficha
     protected boolean ganaVertical(Ficha ficha) {
         for (int j = 0; j < casillas[0].length; j++) {
             boolean columnaCompleta = true;
@@ -61,6 +64,7 @@ public class Tablero {
         return false;
     }
 
+    // Comprueba la diagonal principal (de arriba-izq a abajo-der)
     protected boolean ganaDiagonalDirecta(Ficha ficha) {
         for (int i = 0; i < casillas.length; i++) {
             if (casillas[i][i] != ficha) {
@@ -70,6 +74,7 @@ public class Tablero {
         return true;
     }
 
+    // Comprueba la diagonal secundaria (de arriba-der a abajo-izq)
     protected boolean ganaDiagonalIndirecta(Ficha ficha) {
         int n = casillas.length;
         for (int i = 0; i < n; i++) {
@@ -80,11 +85,13 @@ public class Tablero {
         return true;
     }
 
+    // Mira si se cumple cualquiera de las 4 formas de ganar
     public boolean gana(Ficha ficha) {
         return ganaHorizontal(ficha) || ganaVertical(ficha) ||
                 ganaDiagonalDirecta(ficha) || ganaDiagonalIndirecta(ficha);
     }
 
+    // Si la casilla es null devuelve un espacio para que al pintar quede vacía
     private String valueOf(Ficha ficha) {
         if (ficha == null) {
             return " ";

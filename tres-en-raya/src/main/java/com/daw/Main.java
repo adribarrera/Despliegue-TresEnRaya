@@ -11,6 +11,7 @@ public class Main {
         Ficha fichaInicial = pedirFichaInicial(scan);
         Partida partida = new Partida(3, fichaInicial);
 
+        // Bucle del juego hasta que alguien gane o haya empate
         while (!partida.terminada()) {
             System.out.println(partida);
 
@@ -19,6 +20,7 @@ public class Main {
             int columna = pedirCoordenada(scan, "columna");
 
             System.out.println();
+            // Restamos 1 porque el usuario mete 1-3 y los índices van de 0 a 2
             partida.jugar(fila - 1, columna - 1);
         }
 
@@ -35,6 +37,7 @@ public class Main {
         scan.close();
     }
 
+    // Pide la ficha que empieza y valida que sea X o O
     private static Ficha pedirFichaInicial(Scanner scan) {
         while (true) {
             System.out.print("¿Quién empieza jugando? (X / O): ");
@@ -50,6 +53,7 @@ public class Main {
         }
     }
 
+    // Pide fila o columna y controla que sea un número válido entre 1 y 3
     private static int pedirCoordenada(Scanner scan, String tipo) {
         int valor = -1;
         while (valor < 1 || valor > 3) {
@@ -61,7 +65,7 @@ public class Main {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Error: Debes introducir un número entero válido.");
-                scan.nextLine();
+                scan.nextLine(); // Limpiamos la entrada incorrecta
             }
         }
         return valor;

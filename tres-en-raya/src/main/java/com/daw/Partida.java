@@ -4,6 +4,7 @@ public class Partida {
     private Tablero tablero;
     private Ficha turno;
 
+    // Por defecto empieza jugando la X
     public Partida(int dimension) {
         this.tablero = new Tablero(dimension);
         this.turno = Ficha.X;
@@ -20,6 +21,7 @@ public class Partida {
             return;
         }
 
+        // Si la jugada es válida en el tablero, cambiamos de turno
         boolean jugadaValida = tablero.jugar(turno, fila, columna);
         if (jugadaValida) {
             turno = turno.siguiente();
@@ -28,6 +30,7 @@ public class Partida {
         }
     }
 
+    // Comprueba si alguna de las fichas ha ganado
     public Ficha ganador() {
         if (tablero.gana(Ficha.X)) {
             return Ficha.X;
@@ -38,6 +41,7 @@ public class Partida {
         }
     }
 
+    // La partida acaba si hay ganador o si el tablero se llena
     public boolean terminada() {
         if (ganador() != null) {
             return true;
